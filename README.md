@@ -130,8 +130,18 @@
 15. Caso de Uso 15: Generar un Reporte de Envíos por Cliente
 
     ```sql
-    SELECT envio_id, cliente_id, paquete_id, fecha_envio, destino, ruta_id, sucursal_id 
-    FROM envios WHERE cliente_id = 3;
+    SELECT 
+        envio_id, 
+        cliente_id, 
+        paquete_id, 
+        fecha_envio, 
+        destino, 
+        ruta_id, 
+        sucursal_id 
+    FROM 
+        envios 
+    WHERE 
+        cliente_id = 3;
     
     +----------+------------+------------+---------------------+-----------------------------+---------+-------------+
     | envio_id | cliente_id | paquete_id | fecha_envio         | destino                     | ruta_id | sucursal_id |
@@ -146,9 +156,12 @@
 16. Caso de Uso 16: Actualizar el Estado de un Paquete
 
     ```sql
-    UPDATE paquetes 
-    SET estado_id = 3 
-    WHERE paquete_id = 4;
+    UPDATE 
+        paquetes 
+    SET 
+        estado_id = 3 
+    WHERE 
+        paquete_id = 4;
     ```
 
 
@@ -156,10 +169,15 @@
 17. Caso de Uso 17: Rastrear la Ubicación Actual de un Paquete
 
     ```sql
-    SELECT paquete_id, ubicacion 
-    FROM seguimiento 
-    WHERE paquete_id = 4 
-    ORDER BY fecha_hora DESC
+    SELECT 
+        paquete_id, 
+        ubicacion 
+    FROM 
+        seguimiento 
+    WHERE 
+        paquete_id = 4 
+    ORDER BY 
+        fecha_hora DESC
     
     +-------------------+
     | ubicacion         |
@@ -269,12 +287,21 @@ ORDER BY
 3. Caso de Uso 3: Listar Conductores y sus Rutas Asignadas
 
 ```sql
-SELECT d.nombre AS conductor_nombre, r.descripcion AS ruta_descripcion, v.placa AS vehiculo_placa, s.nombre AS sucursal_nombre 
-FROM conductores_rutas cr
-JOIN conductores d ON cr.conductor_id = d.conductor_id
-JOIN rutas r ON cr.ruta_id = r.ruta_id
-JOIN vehiculos v ON cr.vehiculo_id = v.vehiculo_id
-JOIN sucursales s ON cr.sucursal_id = s.sucursal_id;
+SELECT 
+    d.nombre AS conductor_nombre, 
+    r.descripcion AS ruta_descripcion, 
+    v.placa AS vehiculo_placa, 
+    s.nombre AS sucursal_nombre 
+FROM 
+    conductores_rutas cr
+JOIN 
+    conductores d ON cr.conductor_id = d.conductor_id
+JOIN 
+    rutas r ON cr.ruta_id = r.ruta_id
+JOIN 
+    vehiculos v ON cr.vehiculo_id = v.vehiculo_id
+JOIN 
+    sucursales s ON cr.sucursal_id = s.sucursal_id;
 
 +------------------+------------------+----------------+-----------------+
 | conductor_nombre | ruta_descripcion | vehiculo_placa | sucursal_nombre |
@@ -293,10 +320,15 @@ JOIN sucursales s ON cr.sucursal_id = s.sucursal_id;
 4. Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
 
 ```sql
-SELECT r.descripcion AS ruta_descripcion, a.nombre AS auxiliar_nombre 
-FROM ruta_auxiliares ra
-JOIN rutas r ON ra.ruta_id = r.ruta_id
-JOIN auxiliares a ON ra.auxiliar_id = a.auxiliar_id;
+SELECT 
+    r.descripcion AS ruta_descripcion, 
+    a.nombre AS auxiliar_nombre 
+FROM 
+    ruta_auxiliares ra
+JOIN 
+    rutas r ON ra.ruta_id = r.ruta_id
+JOIN 
+    auxiliares a ON ra.auxiliar_id = a.auxiliar_id;
 
 +------------------+-----------------+
 | ruta_descripcion | auxiliar_nombre |
@@ -315,11 +347,17 @@ JOIN auxiliares a ON ra.auxiliar_id = a.auxiliar_id;
 5. Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
 
 ```sql
-SELECT s.nombre AS sucursal_nombre, e.tipo AS estado_tipo
-FROM paquetes p
-JOIN estados e ON p.estado_id = e.estado_id
-JOIN envios en ON p.paquete_id = en.paquete_id
-JOIN sucursales s ON en.sucursal_id = s.sucursal_id
+SELECT 
+    s.nombre AS sucursal_nombre, 
+    e.tipo AS estado_tipo
+FROM 
+    paquetes p
+JOIN 
+    estados e ON p.estado_id = e.estado_id
+JOIN 
+    envios en ON p.paquete_id = en.paquete_id
+JOIN 
+    sucursales s ON en.sucursal_id = s.sucursal_id
 ORDER BY s.nombre, e.tipo;
     
 +-----------------+----------------+
@@ -378,8 +416,16 @@ ORDER BY
 1. Caso de Uso 1: Obtener Paquetes Enviados Dentro de un Rango de Fecha
 
 ```sql
-SELECT * 
-FROM envios 
+SELECT 
+    envio_id,
+    cliente_id,
+    paquete_id,
+    fecha_envio,
+    destino,
+    ruta_id,
+    sucursal_id
+FROM 
+    envios 
 WHERE fecha_envio BETWEEN '2023-06-01' AND '2023-06-21';
 
 +----------+------------+------------+---------------------+--------------------------+---------+-------------+
@@ -398,8 +444,16 @@ WHERE fecha_envio BETWEEN '2023-06-01' AND '2023-06-21';
 2. Caso de Uso 2: Obtener Paquetes con Ciertos Estados
 
 ```sql
-SELECT paquete_id, numero_seguimiento, peso,dimensiones, contenido, valor_declarado, tipo_servicio_id,estado_id
-FROM paquetes 
+SELECT 
+    paquete_id, 
+    numero_seguimiento, 
+    peso,dimensiones, 
+    contenido, 
+    valor_declarado, 
+    tipo_servicio_id,
+    estado_id
+FROM 
+    paquetes 
 WHERE estado_id IN (1, 2);
 
 +------------+--------------------+------+-------------+-----------+-----------------+------------------+-----------+
